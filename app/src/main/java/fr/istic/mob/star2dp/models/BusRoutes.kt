@@ -5,6 +5,7 @@ import fr.istic.mob.star2dp.Utils
 class BusRoutes {
     var _id:Int = 0
     var shortName: String = ""
+    var routeId:String = ""
     var longName: String = ""
     var description: String = ""
     var type: String = ""

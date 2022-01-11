@@ -20,7 +20,7 @@ class Utils {
         val cursor: Cursor = this.context.contentResolver
             .query(StarContract.BusRoutes.CONTENT_URI, null, null, null, null)!!
         val busRoutes: MutableList<BusRoutes> = ArrayList()
-        busRoutes.add(BusRoutes(0, "", "", "", "", "", ""))
+        //busRoutes.add(BusRoutes(0, "test", "", "", "",  " EBE3E1 "," 060606 "))
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 val item = BusRoutes(
@@ -214,6 +214,24 @@ class Utils {
             }else{
                 ""
             }
+        }
+        fun addQuote(str:String):String{
+            return '"'+str+'"'
+        }
+
+        fun getTerminus(str:String):List<Terminus>{
+            val tab = str.split("(")
+            var terminus = ArrayList<Terminus>(2)
+            var tab2:List<String>? = null
+            if(tab.size>1){
+                tab2 = tab[1].split(")")
+            }
+           // val id1:String = '"0"'
+            if(tab2!!.isNotEmpty()){
+                terminus.add(Terminus("\"0\"",tab2[1]))
+                terminus.add(Terminus("\"1\"",tab2[0]))
+            }
+            return terminus
         }
     }
 

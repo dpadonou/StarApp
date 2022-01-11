@@ -23,14 +23,7 @@ class Fragment1 : Fragment() {
     ): View? {
         val mView = inflater.inflate(R.layout.fragment_1, container, false)
         val routes = activity?.let { Utils(it).getBusRoute() }
-        val adapter = activity?.let {
-            ArrayAdapter<BusRoutes>(
-                it,
-                android.R.layout.simple_spinner_item,
-                routes!!.toList()
-            )
-        }
-        adapter!!.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        val adapter = MyAdapter(this.requireActivity(),R.layout.item, routes!!,R.id.mytextview,R.id.textParent)
         mView.findViewById<Spinner>(R.id.spinner_line)?.adapter = adapter
         mView.findViewById<Spinner>(R.id.spinner_line)?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {

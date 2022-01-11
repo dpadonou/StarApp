@@ -4,7 +4,6 @@ import android.net.Uri
 import android.provider.BaseColumns
 
 interface StarContract {
-
     companion object{
         val AUTHORITY: String = "fr.istic.mob.starapplication"
 
@@ -16,6 +15,7 @@ interface StarContract {
         interface BusRouteColumns : BaseColumns {
             companion object {
                 const val _ID = "_id"
+                const val ROUTE_ID = "route_id"
                 const val SHORT_NAME = "route_short_name"
                 const val LONG_NAME = "route_long_name"
                 const val DESCRIPTION = "route_desc"
@@ -37,6 +37,7 @@ interface StarContract {
         interface TripColumns : BaseColumns {
             companion object {
                 const val _ID = "id"
+                const val TRIP_ID = "trip_id"
                 const val ROUTE_ID = "route_id"
                 const val SERVICE_ID = "service_id"
                 const val HEADSIGN = "trip_headsign"
@@ -58,6 +59,7 @@ interface StarContract {
         interface StopColumns : BaseColumns {
             companion object {
                 const val _ID = "id"
+                const val STOP_ID = "stop_id"
                 const val NAME = "stop_name"
                 const val DESCRIPTION = "stop_desc"
                 const val LATITUDE = "stop_lat"
@@ -100,6 +102,7 @@ interface StarContract {
         interface CalendarColumns : BaseColumns {
             companion object {
                 const val _ID = "id"
+                const val SERVICE_ID = "service_id"
                 const val MONDAY = "monday"
                 const val TUESDAY = "tuesday"
                 const val WEDNESDAY = "wednesday"
@@ -151,5 +154,6 @@ interface StarContract {
                 "vnd.android.cursor.item/vnd.fr.istic.mob.stareg.routesForStop"
         }
     }
+
 
 }
