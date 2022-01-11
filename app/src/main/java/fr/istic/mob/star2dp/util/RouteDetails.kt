@@ -1,4 +1,4 @@
-package fr.istic.mob.star2dp.models
+package fr.istic.mob.star2dp.util
 
 class RouteDetails {
     var name:String = ""

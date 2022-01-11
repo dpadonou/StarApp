@@ -14,4 +14,8 @@
     <string name="le_reste_du_trajet">le reste du trajet</string>
     <string name="arrets_text">Arrêts</string>
     <string name="heures_text">Heures</string>
+    <string name="liste_des_lignes">liste des lignes</string>
+    <string name="terminusChooserText">chooseTermiuns</string>
+    <string name="dateChooserText">04 Decembre 2021</string>
+    <string name="hour">20 : 27</string>
 </resources>

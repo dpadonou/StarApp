@@ -3,10 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_1.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_2.xml" value="0.15454545454545454" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_3.xml" value="0.1" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_4.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/font/roboto_medium.xml" value="0.271875" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/activity_main.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/fragment_1.xml" value="0.24166666666666667" />
       </map>
     </option>
   </component>
@@ -15,5 +14,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.24166666666666667" />
+      </ProjectState>
+    </option>
   </component>
 </project>
