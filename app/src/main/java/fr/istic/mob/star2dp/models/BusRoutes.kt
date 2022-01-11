@@ -1,5 +1,7 @@
 package fr.istic.mob.star2dp.models
 
+import fr.istic.mob.star2dp.Utils
+
 class BusRoutes {
     var _id:Int = 0
     var shortName: String = ""
@@ -24,5 +26,9 @@ class BusRoutes {
         this.type = type
         this.color = color
         this.textColor = textColor
+    }
+
+    override fun toString(): String {
+        return "${Utils.formatString(shortName)}"
     }
 }

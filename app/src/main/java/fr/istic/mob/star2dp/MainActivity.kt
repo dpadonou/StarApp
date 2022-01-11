@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val f1 = this.supportFragmentManager.findFragmentById(R.id.fragment1) as Fragment1
     }
 
 }

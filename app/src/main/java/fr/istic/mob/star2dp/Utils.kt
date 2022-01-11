@@ -206,4 +206,15 @@ class Utils {
         return busRoutes
     }
 
+    companion object{
+        /**Enlevez les cotes présentes sur les valeurs**/
+        fun formatString(str:String):String{
+            return if (str.length > 1){
+                str.subSequence(1,str.length-1).toString()
+            }else{
+                ""
+            }
+        }
+    }
+
 }

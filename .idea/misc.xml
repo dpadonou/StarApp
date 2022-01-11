@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Arnauld Cyriaque/.gradle/caches/transforms-3/418862d49e47e0633ab6131300a274bb/transformed/appcompat-1.4.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.1" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_1.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_2.xml" value="0.15454545454545454" />
         <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_3.xml" value="0.1" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_4.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_4.xml" value="0.15454545454545454" />
       </map>
     </option>
   </component>
