@@ -58,7 +58,6 @@ class Utils {
         /**
          * Récupérer la liste des arrêts correspondant à la recherche
          */
-
         fun searchStop(searchText: String): List<String>? {
             var searchText = searchText
             searchText = searchText.trim { it <= ' ' }

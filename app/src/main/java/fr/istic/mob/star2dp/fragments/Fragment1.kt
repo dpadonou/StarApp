@@ -2,16 +2,11 @@ package fr.istic.mob.star2dp.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.TimePicker
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.*
 import androidx.fragment.app.Fragment
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment1Binding
@@ -20,14 +15,16 @@ import fr.istic.mob.star2dp.util.Utils
 import java.util.*
 
 class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
-TimePickerDialog.OnTimeSetListener{
+    TimePickerDialog.OnTimeSetListener {
 
-    private var binding : Fragment1Binding? = null
+    private var binding: Fragment1Binding? = null
 
     private lateinit var dateDialog: DatePickerDialog
     private lateinit var timeDialog: TimePickerDialog
     private lateinit var btnDate: Button
     private lateinit var btnTime: Button
+    private lateinit var lines: Spinner
+    private lateinit var stops: Spinner
 
     private var day = 0
     private var month = 0
@@ -35,23 +32,56 @@ TimePickerDialog.OnTimeSetListener{
     private var minutes = 0
     private var hours = 0
 
+    private var selectedBusRoutes: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = Fragment1Binding.inflate(inflater, container, false)
         var view = binding!!.root
 
-
         btnDate = view.findViewById(R.id.chooseDateBtn)
         btnTime = view.findViewById(R.id.chooseHourBtn)
-
-        //val busRoutes = Utils.getBusRoute()
-        //val adapter = ArrayAdapter<BusRoutes>(this, R.layout.support_simple_spinner_dropdown_item, busRoutes)
-
         setPickers()
+
+        lines = view.findViewById(R.id.lignesSpin)
+        stops = view.findViewById(R.id.terminusSpin)
+        activity?.let { Utils.setContext(it) }
+        val linesArrayAdapter = ArrayAdapter(
+            this.requireContext(),
+            R.layout.support_simple_spinner_dropdown_item,
+            Utils.getBusRoute()!!
+        )
+        lines.adapter = linesArrayAdapter
+
+        lines.onItemSelectedListener = object : AdapterView.OnItemSelectedListener,
+            AdapterView.OnItemLongClickListener {
+            override fun onItemSelected( parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //selectedBusRoutes = parent?.getItemAtPosition(position).
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemLongClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+        }
+
 
         // Inflate the layout for this fragment
         return view
@@ -71,7 +101,7 @@ TimePickerDialog.OnTimeSetListener{
             DatePickerDialog(this.requireContext(), this, year, month, day).show()
         }
 
-        btnTime.setOnClickListener{
+        btnTime.setOnClickListener {
             getCalendarObject()
             TimePickerDialog(this.requireContext(), this, hours, minutes, true).show()
         }
