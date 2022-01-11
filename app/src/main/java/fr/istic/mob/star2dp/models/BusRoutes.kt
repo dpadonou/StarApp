@@ -1,15 +1,16 @@
 package fr.istic.mob.star2dp.models
 
-import fr.istic.mob.star2dp.Utils
+import fr.istic.mob.star2dp.util.Utils
 
 class BusRoutes {
-    var _id:Int = 0
+    var _id: Int = 0
     var shortName: String = ""
     var longName: String = ""
     var description: String = ""
     var type: String = ""
     var color: String = ""
     var textColor: String = ""
+
     constructor(
         _id: Int,
         shortName: String,
@@ -29,6 +30,6 @@ class BusRoutes {
     }
 
     override fun toString(): String {
-        return "${Utils.formatString(shortName)}"
+        return Utils.removeQuotes(shortName)
     }
 }

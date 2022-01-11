@@ -3,6 +3,7 @@ package fr.istic.mob.star2dp.fragments
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment1Binding
 import fr.istic.mob.star2dp.models.BusRoutes
+import fr.istic.mob.star2dp.util.CustomAdapter
+import fr.istic.mob.star2dp.util.Intermediate
 import fr.istic.mob.star2dp.util.Utils
 import java.util.*
 
@@ -18,9 +21,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
     private var binding: Fragment1Binding? = null
+    private lateinit var intermadiate: Intermediate
 
-    private lateinit var dateDialog: DatePickerDialog
-    private lateinit var timeDialog: TimePickerDialog
     private lateinit var btnDate: Button
     private lateinit var btnTime: Button
     private lateinit var lines: Spinner
@@ -32,11 +34,16 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     private var minutes = 0
     private var hours = 0
 
-    private var selectedBusRoutes: String? = null
+    private var choosedDate: String? = null
+    private var chosedTime: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var selectedBusRoutes: BusRoutes? = null
+    private var selectedBusRoutesFullName: String? = null
+    private var selectedBusRoutesShortName: String? = null
+
+    private var selectedTerminus: String? = null
+    private var listTerminus: List<String>? = null
+    private lateinit var btnNext: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,57 +52,111 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     ): View? {
 
         binding = Fragment1Binding.inflate(inflater, container, false)
-        var view = binding!!.root
+        val view = binding!!.root
+
+        intermadiate = activity as Intermediate
 
         btnDate = view.findViewById(R.id.chooseDateBtn)
         btnTime = view.findViewById(R.id.chooseHourBtn)
-        setPickers()
-
+        btnNext = view.findViewById(R.id.nextBtn)
+        btnNext.isClickable = false
         lines = view.findViewById(R.id.lignesSpin)
         stops = view.findViewById(R.id.terminusSpin)
+
+        setPickers()
+
+        stops.visibility = View.GONE
         activity?.let { Utils.setContext(it) }
-        val linesArrayAdapter = ArrayAdapter(
-            this.requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
-            Utils.getBusRoute()!!
+        val linesArrayAdapter = CustomAdapter(
+            this.requireActivity(),
+            R.layout.item, Utils.getBusRoute()!!,
+            R.id.myTextView,
+            R.id.textParent
         )
         lines.adapter = linesArrayAdapter
-
-        lines.onItemSelectedListener = object : AdapterView.OnItemSelectedListener,
-            AdapterView.OnItemLongClickListener {
-            override fun onItemSelected( parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //selectedBusRoutes = parent?.getItemAtPosition(position).
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onItemLongClick(
+        val context = this.requireContext()
+        lines.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
-            ): Boolean {
-                TODO("Not yet implemented")
+            ) {
+                if (position != 0) {
+                    selectedBusRoutes = parent?.getItemAtPosition(position) as BusRoutes
+
+                    selectedBusRoutesFullName = Utils.removeQuotes(selectedBusRoutes!!.longName)
+                    selectedBusRoutesShortName = Utils.removeQuotes(selectedBusRoutes!!.shortName)
+
+                    Log.i("", "$selectedBusRoutesFullName")
+                    listTerminus = Utils.getTerminus(selectedBusRoutesFullName!!)
+                    Log.i("", "${listTerminus.toString()}")
+                    if (listTerminus != null) {
+                        stops.visibility = View.VISIBLE
+                        val stopsArrayAdapter = ArrayAdapter(
+                            context,
+                            R.layout.support_simple_spinner_dropdown_item,
+                            listTerminus!!
+                        )
+                        stops.adapter = stopsArrayAdapter
+                    }
+                } else {
+                    stops.visibility = View.GONE
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
         }
 
+        stops.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position != 0) {
+                    selectedTerminus = parent?.getItemAtPosition(position) as String
+                    btnNext.isClickable = true
+                    println()
+                    Log.i("", "$selectedTerminus")
+                    println()
+                } else {
+                    btnNext.isClickable = false
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
+        btnNext.setOnClickListener {
+
+            if (selectedBusRoutesFullName != null && selectedTerminus != null) {
+                val data =
+                    hashMapOf(
+                        "lineLongName" to selectedBusRoutesFullName!!,
+                        "lineShortName" to selectedBusRoutesShortName!!,
+                        "terminus" to selectedTerminus!!,
+                        "date" to choosedDate!!,
+                        "time" to chosedTime!!
+                    )
+
+                val fragment2 = Fragment2.newInstance()
+                intermadiate.sendData(fragment2, data)
+            }
+        }
 
         // Inflate the layout for this fragment
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1().apply {
-
-            }
-    }
-
     private fun setPickers() {
+        getCalendarObject()
+
         btnDate.setOnClickListener {
             getCalendarObject()
             DatePickerDialog(this.requireContext(), this, year, month, day).show()
@@ -115,11 +176,16 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         year = cal.get(Calendar.YEAR)
         minutes = cal.get(Calendar.MINUTE)
         hours = cal.get(Calendar.HOUR_OF_DAY)
+
+        choosedDate = "$day ${formatMonth(month)} $year"
+        btnDate.text = choosedDate
+        chosedTime = "$hours : $minutes"
+        btnTime.text = chosedTime
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        val newText = "$dayOfMonth ${formatMonth(month)} $year"
-        btnDate.text = newText
+        choosedDate = "$dayOfMonth ${formatMonth(month)} $year"
+        btnDate.text = choosedDate
     }
 
     private fun formatMonth(month: Int): String {
@@ -167,8 +233,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        val newText = "$hourOfDay : $minute"
-        btnTime.text = newText
+        chosedTime = "$hourOfDay : $minute"
+        btnTime.text = chosedTime
     }
 
     override fun onDestroy() {
@@ -176,4 +242,11 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         binding = null
     }
 
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            Fragment1().apply {
+
+            }
+    }
 }

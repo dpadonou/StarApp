@@ -32,7 +32,17 @@ class Utils {
             val cursor: Cursor = this.context.contentResolver
                 .query(StarContract.BusRoutes.CONTENT_URI, null, null, null, null)!!
             val busRoutes: MutableList<BusRoutes> = ArrayList()
-            busRoutes.add(BusRoutes(0, "", "", "", "", "", ""))
+            busRoutes.add(
+                BusRoutes(
+                    0,
+                    "Choisissez une ligne de bus",
+                    "Choisissez une ligne de bus",
+                    "",
+                    "",
+                    "E7E2E1",
+                    "000000"
+                )
+            )
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     val item = BusRoutes(
@@ -86,7 +96,7 @@ class Utils {
         fun getStop(busRouteId: String, directionId: String): List<Stops>? {
             val listStops: MutableList<Stops> = ArrayList()
             val selectionArgs = arrayOf(busRouteId, directionId)
-            val cursor: Cursor = this.context.getContentResolver().query(
+            val cursor: Cursor = this.context.contentResolver.query(
                 StarContract.Stops.CONTENT_URI,
                 null,
                 null,
@@ -216,6 +226,38 @@ class Utils {
             cursor.close()
             return busRoutes
         }
+
+        /**Enlevez les cotes présentes sur les valeurs**/
+        fun removeQuotes(str: String): String {
+            return str.replace("\"", "")
+        }
+        /** Ajoutez des cotes sur certaines valeurs **/
+        fun addQuote(str: String): String {
+            return '"'+str+'"'
+        }
+        /**Récupérer les différentes directions d'une ligne **/
+        fun getTerminus(str: String): List<String> {
+            var splitted = str.split("<>")
+            var result: MutableList<String> = mutableListOf()
+            result.add("Choisir une direction")
+            for (str:String in splitted){
+                val firstSplit = str.split("(")
+                var secondSplit:List<String>? = null
+                if(firstSplit.size > 1){
+                    secondSplit = firstSplit[1].split(")")
+                }
+
+                result.add(secondSplit?.get(0).toString())
+            }
+            //result.addAll(listOf(splitted[0], splitted[splitted.size - 1]))
+
+            return result
+        }
+
+        /** Ajouter # sur un string "**/
+         fun appendHashtag(str:String):String{
+             return "#$str"
+         }
     }
 
 }
