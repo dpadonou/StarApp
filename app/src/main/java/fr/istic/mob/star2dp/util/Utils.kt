@@ -231,12 +231,13 @@ class Utils {
         fun removeQuotes(str: String): String {
             return str.replace("\"", "")
         }
+
         /** Ajoutez des cotes sur certaines valeurs **/
         fun addQuote(str: String): String {
-            return '"'+str+'"'
+            return '"' + str + '"'
         }
         /**Récupérer les différentes directions d'une ligne **/
-        fun getTerminus(str: String): List<String> {
+        /*fun getTerminus(str: String): List<String> {
             var splitted = str.split("<>")
             var result: MutableList<String> = mutableListOf()
             result.add("Choisir une direction")
@@ -246,18 +247,34 @@ class Utils {
                 if(firstSplit.size > 1){
                     secondSplit = firstSplit[1].split(")")
                 }
-
                 result.add(secondSplit?.get(0).toString())
             }
             //result.addAll(listOf(splitted[0], splitted[splitted.size - 1]))
 
             return result
-        }
+        }*/
 
         /** Ajouter # sur un string "**/
-         fun appendHashtag(str:String):String{
-             return "#$str"
-         }
+        fun appendHashtag(str: String): String {
+            return "#$str"
+        }
+
+        fun getTerminus(str: String): List<Terminus> {
+            var splitted = str.split("<>")
+            var result: MutableList<Terminus> = mutableListOf()
+            result.add(Terminus("", "Choisir une direction"))
+            for (value: String in splitted) {
+                val firstSplit = value.split("(")
+                if (firstSplit.size > 1) {
+                    val secondSplit = firstSplit[1].split(")")
+                    result.add(Terminus("\"0\"", secondSplit[1]))
+                    result.add(Terminus("\"1\"", secondSplit[0]))
+                }
+            }
+
+            return result
+        }
+
     }
 
 }

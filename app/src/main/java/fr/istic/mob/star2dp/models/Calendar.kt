@@ -2,6 +2,7 @@ package fr.istic.mob.star2dp.models
 
 class Calendar {
     var id:Int = 0
+    var serviceId:String = ""
     var monday:String = ""
     var tuesday:String = ""
     var wednesday = ""
@@ -35,4 +36,5 @@ class Calendar {
         this.startDate = startDate
         this.endDate = endDate
     }
+
 }

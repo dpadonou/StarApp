@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment1Binding
 import fr.istic.mob.star2dp.models.BusRoutes
-import fr.istic.mob.star2dp.util.CustomAdapter
-import fr.istic.mob.star2dp.util.Intermediate
-import fr.istic.mob.star2dp.util.Utils
+import fr.istic.mob.star2dp.util.*
+import java.time.ZoneId
 import java.util.*
 
 class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
@@ -34,15 +33,18 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     private var minutes = 0
     private var hours = 0
 
-    private var choosedDate: String? = null
-    private var chosedTime: String? = null
+    private var chosenDate: String? = null
+    private var chosenDay: String? = null
+    private var chosenTime: String? = null
+    private var fullChosenTime: String? = null
+    private var formattedChosenDate: String? = null
 
     private var selectedBusRoutes: BusRoutes? = null
     private var selectedBusRoutesFullName: String? = null
-    private var selectedBusRoutesShortName: String? = null
 
-    private var selectedTerminus: String? = null
-    private var listTerminus: List<String>? = null
+    private var selectedTerminus: Terminus? = null
+
+    private var listTerminus: List<Terminus>? = null
     private lateinit var btnNext: Button
 
     override fun onCreateView(
@@ -69,7 +71,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         activity?.let { Utils.setContext(it) }
         val linesArrayAdapter = CustomAdapter(
             this.requireActivity(),
-            R.layout.item, Utils.getBusRoute()!!,
+            R.layout.item,
+            Utils.getBusRoute()!!,
             R.id.myTextView,
             R.id.textParent
         )
@@ -86,11 +89,11 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                     selectedBusRoutes = parent?.getItemAtPosition(position) as BusRoutes
 
                     selectedBusRoutesFullName = Utils.removeQuotes(selectedBusRoutes!!.longName)
-                    selectedBusRoutesShortName = Utils.removeQuotes(selectedBusRoutes!!.shortName)
-
                     Log.i("", "$selectedBusRoutesFullName")
+
                     listTerminus = Utils.getTerminus(selectedBusRoutesFullName!!)
-                    Log.i("", "${listTerminus.toString()}")
+                    Log.i("", "$listTerminus")
+
                     if (listTerminus != null) {
                         stops.visibility = View.VISIBLE
                         val stopsArrayAdapter = ArrayAdapter(
@@ -104,10 +107,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                     stops.visibility = View.GONE
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-
         }
 
         stops.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -118,7 +119,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                 id: Long
             ) {
                 if (position != 0) {
-                    selectedTerminus = parent?.getItemAtPosition(position) as String
+                    selectedTerminus = parent?.getItemAtPosition(position) as Terminus
+
                     btnNext.isClickable = true
                     println()
                     Log.i("", "$selectedTerminus")
@@ -134,15 +136,24 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         }
 
         btnNext.setOnClickListener {
-
             if (selectedBusRoutesFullName != null && selectedTerminus != null) {
+                println()
+                println("chosenDay $chosenDay")
+                println("chosenDate $chosenDate")
+                println("formattedChosenDate $formattedChosenDate")
+                println("chosenTime $chosenTime")
+                println("fullChosenTime $fullChosenTime")
+                println()
+
                 val data =
                     hashMapOf(
-                        "lineLongName" to selectedBusRoutesFullName!!,
-                        "lineShortName" to selectedBusRoutesShortName!!,
+                        "line" to selectedBusRoutes!!,
                         "terminus" to selectedTerminus!!,
-                        "date" to choosedDate!!,
-                        "time" to chosedTime!!
+                        "chosenDay" to chosenDay!!,
+                        "chosenDate" to chosenDate!!,
+                        "formattedChosenDate" to formattedChosenDate!!,
+                        "chosenTime" to chosenTime!!,
+                        "fullChosenTime" to fullChosenTime!!,
                     )
 
                 val fragment2 = Fragment2.newInstance()
@@ -156,20 +167,19 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
 
     private fun setPickers() {
         getCalendarObject()
-
         btnDate.setOnClickListener {
-            getCalendarObject()
+            //getCalendarObject()
             DatePickerDialog(this.requireContext(), this, year, month, day).show()
         }
 
         btnTime.setOnClickListener {
-            getCalendarObject()
+            //getCalendarObject()
             TimePickerDialog(this.requireContext(), this, hours, minutes, true).show()
         }
     }
 
     private fun getCalendarObject() {
-        val cal: Calendar = Calendar.getInstance()
+        val cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+01"))
 
         day = cal.get(Calendar.DAY_OF_MONTH)
         month = cal.get(Calendar.MONTH)
@@ -177,64 +187,36 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         minutes = cal.get(Calendar.MINUTE)
         hours = cal.get(Calendar.HOUR_OF_DAY)
 
-        choosedDate = "$day ${formatMonth(month)} $year"
-        btnDate.text = choosedDate
-        chosedTime = "$hours : $minutes"
-        btnTime.text = chosedTime
+        chosenDay = CalendarUtils.getDayName(cal.get(Calendar.DAY_OF_WEEK))
+        chosenDate = CalendarUtils.displayDateFormat(day, month, year)
+        formattedChosenDate = CalendarUtils.formatDate(year, month+1, day)
+        btnDate.text = CalendarUtils.displayDateFormat(day, month, year)
+
+        chosenTime = CalendarUtils.displayTimeFormat(hours, minutes)
+        fullChosenTime = CalendarUtils.formatHour(hours, minutes, cal.get(Calendar.SECOND))
+        btnTime.text = chosenTime
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        choosedDate = "$dayOfMonth ${formatMonth(month)} $year"
-        btnDate.text = choosedDate
-    }
+        val cal = Calendar.getInstance()
+        cal.set(year,month,dayOfMonth)
 
-    private fun formatMonth(month: Int): String {
-        when (month + 1) {
-            1 -> {
-                return "Janvier"
-            }
-            2 -> {
-                return "Fevrier"
-            }
-            3 -> {
-                return "Mars"
-            }
-            4 -> {
-                return "Avril"
-            }
-            5 -> {
-                return "Mai"
-            }
-            6 -> {
-                return "Juin"
-            }
-            7 -> {
-                return "Juillet"
-            }
-            8 -> {
-                return "Août"
-            }
-            9 -> {
-                return "Septembre"
-            }
-            10 -> {
-                return "Octobre"
-            }
-            11 -> {
-                return "Novembre"
-            }
-            12 -> {
-                return "Decembre"
-            }
-            else -> {
-                return "####"
-            }
-        }
+        this.day = cal.get(Calendar.DAY_OF_MONTH)
+        this.month = cal.get(Calendar.MONTH)
+        this.year = cal.get(Calendar.YEAR)
+
+        chosenDay = CalendarUtils.getDayName(cal.get(Calendar.DAY_OF_WEEK))
+        chosenDate = CalendarUtils.displayDateFormat(dayOfMonth, month, year)
+        formattedChosenDate = CalendarUtils.formatDate(year, month+1, dayOfMonth)
+
+        btnDate.text = CalendarUtils.displayDateFormat(dayOfMonth, month, year)
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        chosedTime = "$hourOfDay : $minute"
-        btnTime.text = chosedTime
+        chosenTime = CalendarUtils.displayTimeFormat(hours, minutes)
+        fullChosenTime = CalendarUtils.formatHour(hours, minutes, Calendar.SECOND)
+
+        btnTime.text = chosenTime
     }
 
     override fun onDestroy() {

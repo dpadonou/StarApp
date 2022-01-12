@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), Intermediate {
 
     }
 
-    override fun sendData(receiver: Fragment, data: HashMap<String, String>) {
+    override fun sendData(receiver: Fragment, data: HashMap<String, Any>) {
         val bundle = Bundle()
         bundle.putSerializable("data", data)
         receiver.arguments = bundle

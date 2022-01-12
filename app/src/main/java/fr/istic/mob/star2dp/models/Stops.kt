@@ -2,6 +2,7 @@ package fr.istic.mob.star2dp.models
 
 class Stops {
     var id:Int = 0
+    var stopId:String = ""
     var stopName:String = ""
     var description:String = ""
     var latitude:String = ""
@@ -23,4 +24,5 @@ class Stops {
         this.longitutde = longitutde
         this.wheelChairBoarding = wheelChairBoarding
     }
+
 }

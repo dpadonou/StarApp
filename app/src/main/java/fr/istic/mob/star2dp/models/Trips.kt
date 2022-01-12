@@ -3,6 +3,7 @@ package fr.istic.mob.star2dp.models
 class Trips {
 
     var id:Int = 0
+    var tripId:String = ""
     var routeId:String = ""
     var serviceId:String = ""
     var headSign:String = ""
@@ -27,4 +28,5 @@ class Trips {
         this.blockId = blockId
         this.wheelChairAccessible = wheelChairAccessible
     }
+
 }
