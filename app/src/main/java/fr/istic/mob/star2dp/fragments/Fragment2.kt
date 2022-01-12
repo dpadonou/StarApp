@@ -1,22 +1,20 @@
 package fr.istic.mob.star2dp.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment2Binding
 import fr.istic.mob.star2dp.models.BusRoutes
-import fr.istic.mob.star2dp.util.CalendarUtils
+import fr.istic.mob.star2dp.models.Stops
 import fr.istic.mob.star2dp.util.Intermediate
 import fr.istic.mob.star2dp.util.Terminus
-import java.time.LocalDate
-import java.time.LocalTime
+import fr.istic.mob.star2dp.util.Utils
 
 class Fragment2 : Fragment() {
 
@@ -29,7 +27,8 @@ class Fragment2 : Fragment() {
     private lateinit var selectedTerminus: TextView
     private lateinit var selectedDateTextView: TextView
     private lateinit var selectedTimeTextView: TextView
-    private lateinit var listStops: ListView
+    private lateinit var stopsListView: ListView
+    private lateinit var stopsList: List<Stops>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,20 +54,22 @@ class Fragment2 : Fragment() {
             selectedTerminus = view.findViewById(R.id.bus_direction)
             selectedDateTextView = view.findViewById(R.id.selected_date_text_view)
             selectedTimeTextView = view.findViewById(R.id.selected_time_text_view)
-            listStops = view.findViewById(R.id.stopsListView)
+            stopsListView = view.findViewById(R.id.stopsListView)
 
-            selectedLine.text = (data!!["line"] as BusRoutes).shortName
+            selectedLine.text = Utils.removeQuotes((data!!["line"] as BusRoutes).shortName)
             selectedTerminus.text = (data!!["terminus"] as Terminus).name
             selectedDateTextView.text = data!!["chosenDate"] as String
             selectedTimeTextView.text = data!!["chosenTime"] as String
         }
 
-        /*val stopsArrayAdapter = ArrayAdapter(
-            context,
-            R.layout.simple_list_,
-            listTerminus!!
+        stopsList = Utils.getStop((data!!["line"] as BusRoutes).routeId, (data!!["terminus"] as Terminus).id)!!
+        val stopsArrayAdapter = ArrayAdapter(
+            this.requireContext(),
+            R.layout.support_simple_spinner_dropdown_item,
+            stopsList
         )
-        stops.adapter = stopsArrayAdapter*/
+
+        stopsListView.adapter = stopsArrayAdapter
 
         return view
     }

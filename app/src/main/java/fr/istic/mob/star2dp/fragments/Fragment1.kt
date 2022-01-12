@@ -137,14 +137,6 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
 
         btnNext.setOnClickListener {
             if (selectedBusRoutesFullName != null && selectedTerminus != null) {
-                println()
-                println("chosenDay $chosenDay")
-                println("chosenDate $chosenDate")
-                println("formattedChosenDate $formattedChosenDate")
-                println("chosenTime $chosenTime")
-                println("fullChosenTime $fullChosenTime")
-                println()
-
                 val data =
                     hashMapOf(
                         "line" to selectedBusRoutes!!,
@@ -155,7 +147,6 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                         "chosenTime" to chosenTime!!,
                         "fullChosenTime" to fullChosenTime!!,
                     )
-
                 val fragment2 = Fragment2.newInstance()
                 intermadiate.sendData(fragment2, data)
             }
