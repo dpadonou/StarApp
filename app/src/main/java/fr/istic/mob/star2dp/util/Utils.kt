@@ -180,8 +180,7 @@ class Utils {
             val cursor: Cursor = this.context.contentResolver
                 .query(StarContract.RouteDetails.CONTENT_URI, null, null, selectionArgs, null)!!
             val routeDetails: MutableList<RouteDetails> = ArrayList()
-            if (cursor != null) {
-            }
+
             if (cursor.moveToFirst()) {
                 do {
                     val item = RouteDetails(
@@ -208,20 +207,18 @@ class Utils {
             )!!
             val busRoutes: MutableList<BusRoutes> = ArrayList()
             busRoutes.add(BusRoutes(0, "","", "", "", "", "", ""))
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    val item = BusRoutes(
-                        cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TYPE)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.COLOR)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TEXT_COLOR))
-                    )
-                    busRoutes.add(item)
-                }
+            while (cursor.moveToNext()) {
+                val item = BusRoutes(
+                    cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TYPE)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.COLOR)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TEXT_COLOR))
+                )
+                busRoutes.add(item)
             }
             val i = busRoutes.size
             if (i != 0) {
@@ -275,7 +272,6 @@ class Utils {
                     result.add(Terminus("\"1\"", secondSplit[0]))
                 }
             }
-
             return result
         }
 

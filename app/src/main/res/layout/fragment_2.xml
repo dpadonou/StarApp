@@ -35,7 +35,7 @@
                     android:text="@string/prev_date" />
 
                 <TextView
-                    android:id="@+id/selected_date_text_view"
+                    android:id="@+id/selected_date_text_view_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFEBEE"
@@ -52,7 +52,7 @@
                     android:text="@string/at" />
 
                 <TextView
-                    android:id="@+id/selected_time_text_view"
+                    android:id="@+id/selected_time_text_view_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
@@ -76,7 +76,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/bus_route"
+                    android:id="@+id/bus_route_text_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -100,7 +100,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/bus_direction"
+                    android:id="@+id/bus_direction_text_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"

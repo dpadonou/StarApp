@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
@@ -22,6 +23,8 @@ class Fragment2 : Fragment() {
     private lateinit var intermadiate: Intermediate
 
     var data: HashMap<String, Any>? = null
+
+    private var selectedStops: Stops? = null
 
     private lateinit var selectedLine: TextView
     private lateinit var selectedTerminus: TextView
@@ -50,10 +53,10 @@ class Fragment2 : Fragment() {
         }
 
         if (data != null) {
-            selectedLine = view.findViewById(R.id.bus_route)
-            selectedTerminus = view.findViewById(R.id.bus_direction)
-            selectedDateTextView = view.findViewById(R.id.selected_date_text_view)
-            selectedTimeTextView = view.findViewById(R.id.selected_time_text_view)
+            selectedLine = view.findViewById(R.id.bus_route_text_2)
+            selectedTerminus = view.findViewById(R.id.bus_direction_text_2)
+            selectedDateTextView = view.findViewById(R.id.selected_date_text_view_2)
+            selectedTimeTextView = view.findViewById(R.id.selected_time_text_view_2)
             stopsListView = view.findViewById(R.id.stopsListView)
 
             selectedLine.text = Utils.removeQuotes((data!!["line"] as BusRoutes).shortName)
@@ -68,9 +71,16 @@ class Fragment2 : Fragment() {
             R.layout.support_simple_spinner_dropdown_item,
             stopsList
         )
-
         stopsListView.adapter = stopsArrayAdapter
 
+        stopsListView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                selectedStops = parent?.getItemAtPosition(position) as Stops
+                if (selectedStops != null) {
+                    data!!["stop"] = selectedStops!!
+                    intermadiate.sendData(Fragment3.newInstance(), data!!)
+                }
+            }
         return view
     }
 

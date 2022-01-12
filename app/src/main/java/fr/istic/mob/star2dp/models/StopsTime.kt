@@ -1,5 +1,7 @@
 package fr.istic.mob.star2dp.models
 
+import fr.istic.mob.star2dp.util.Utils
+
 class StopsTime {
     var id:Int = 0
     var tripId:String = ""
@@ -22,5 +24,9 @@ class StopsTime {
         this.departureTime = departureTime
         this.stopId = stopId
         this.stopSequence = stopSequence
+    }
+
+    override fun toString(): String {
+        return "Prévus pour: ${Utils.removeQuotes(arrivalTime).dropLast(3).replace(':', 'h')}"
     }
 }

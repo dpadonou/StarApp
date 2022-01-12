@@ -1,138 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.Fragment3">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragments.Fragment3"
+        android:layout_height="wrap_content"
+        android:background="#0FC1A1"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-
-
-        <LinearLayout android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:background="@android:color/holo_green_dark">
-
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingVertical="20dp"
-                android:paddingLeft="20dp">
-
-
-                <LinearLayout android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ligne_text"
-                        android:textSize="23dp"
-                        android:textColor="@android:color/secondary_text_dark"
-                        android:textStyle="bold" />
-
-                    <TextView android:id="@+id/bus_route"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="C1 line "
-                        android:textSize="30dp"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-
-                <LinearLayout android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/direction_text"
-                        android:textSize="20dp"
-                        android:textColor="@android:color/secondary_text_dark"
-                        android:textStyle="bold" />
-
-                    <TextView android:id="@+id/bus_direction"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="C1 direction"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-
-                <LinearLayout android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/select_stop_text"
-                        android:textSize="20dp"
-                        android:textColor="@android:color/secondary_text_dark"
-                        android:textStyle="bold" />
-
-                    <TextView android:id="@+id/stop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Donzelot Stop"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-
-
-
-
-
-
-            </LinearLayout>
-
+            android:paddingVertical="20dp"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry">
 
             <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/select_stop_time"
-                    android:textSize="18dp"
+                    android:textColor="#FFEBEE"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:text="@string/prev_date" />
+
+                <TextView
+                    android:id="@+id/selected_date_text_view_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFEBEE"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="04 Decembre 2022" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFEBEE"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="@string/at" />
+
+                <TextView
+                    android:id="@+id/selected_time_text_view_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
-                    android:gravity="center"
-                    android:background="@android:color/holo_green_light"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="20 : 27" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ligne_text"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/bus_route_text_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:text="C1 line " />
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="2dp">
-
-            <ListView android:id="@+id/listView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="22dp"
-                android:gravity="center" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/direction_text"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/bus_direction_text_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="C1 direction" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_stop_text"
+                    android:textColor="@android:color/secondary_text_dark"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stop_text_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="Donzelot Stop"/>
+            </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#90E0AB"
+                android:gravity="center"
+                android:text="@string/select_stop_time"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:height="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/stop_times_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

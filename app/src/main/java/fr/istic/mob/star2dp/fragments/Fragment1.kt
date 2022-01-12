@@ -147,8 +147,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                         "chosenTime" to chosenTime!!,
                         "fullChosenTime" to fullChosenTime!!,
                     )
-                val fragment2 = Fragment2.newInstance()
-                intermadiate.sendData(fragment2, data)
+                intermadiate.sendData(Fragment2.newInstance(), data)
             }
         }
 
