@@ -1,5 +1,7 @@
 package fr.istic.mob.star2dp.models
 
+import fr.istic.mob.star2dp.util.Utils
+
 class Stops {
     var id:Int = 0
     var stopId:String = ""
@@ -11,6 +13,7 @@ class Stops {
 
     constructor(
         id: Int,
+        stopId:String,
         stopName: String,
         description: String,
         latitude: String,
@@ -18,6 +21,7 @@ class Stops {
         wheelChairBoarding: String
     ) {
         this.id = id
+        this.stopId = stopId
         this.stopName = stopName
         this.description = description
         this.latitude = latitude
@@ -25,4 +29,7 @@ class Stops {
         this.wheelChairBoarding = wheelChairBoarding
     }
 
+    override fun toString(): String {
+        return Utils.removeQuotes(stopName)+"-"+Utils.removeQuotes(description)
+    }
 }

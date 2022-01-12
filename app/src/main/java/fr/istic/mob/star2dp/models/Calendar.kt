@@ -15,6 +15,7 @@ class Calendar {
 
     constructor(
         id: Int,
+        serviceId:String,
         monday: String,
         tuesday: String,
         wednesday: String,
@@ -26,6 +27,7 @@ class Calendar {
         endDate: String
     ) {
         this.id = id
+        this.serviceId = serviceId
         this.monday = monday
         this.tuesday = tuesday
         this.wednesday = wednesday

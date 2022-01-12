@@ -14,6 +14,7 @@ class Trips {
     constructor(
         id: Int,
         routeId: String,
+        tripId:String,
         serviceId: String,
         headSign: String,
         directionId: String,
@@ -21,6 +22,7 @@ class Trips {
         wheelChairAccessible: String
     ) {
         this.id = id
+        this.tripId
         this.routeId = routeId
         this.serviceId = serviceId
         this.headSign = headSign

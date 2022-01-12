@@ -35,6 +35,7 @@ class Utils {
             busRoutes.add(
                 BusRoutes(
                     0,
+                    "",
                     "Choisissez une ligne de bus",
                     "Choisissez une ligne de bus",
                     "",
@@ -47,6 +48,7 @@ class Utils {
                 while (cursor.moveToNext()) {
                     val item = BusRoutes(
                         cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
+                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),
@@ -107,6 +109,7 @@ class Utils {
                 do {
                     val item = Stops(
                         cursor.getInt(cursor.getColumnIndex(StarContract.Stops.StopColumns._ID)),
+                        cursor.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.STOP_ID)),
                         cursor.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.NAME)),
                         cursor.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.DESCRIPTION)),
                         cursor.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.LATITUDE)),
@@ -204,11 +207,12 @@ class Utils {
                 StarContract.Stops.StopColumns._ID
             )!!
             val busRoutes: MutableList<BusRoutes> = ArrayList()
-            busRoutes.add(BusRoutes(0, "", "", "", "", "", ""))
+            busRoutes.add(BusRoutes(0, "","", "", "", "", "", ""))
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     val item = BusRoutes(
                         cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
+                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
                         cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),

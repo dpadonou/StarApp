@@ -13,6 +13,7 @@ class BusRoutes {
     var textColor: String = ""
     constructor(
         _id: Int,
+        routeId:String,
         shortName: String,
         longName: String,
         description: String,
@@ -21,6 +22,7 @@ class BusRoutes {
         textColor: String
     ) {
         this._id = _id
+        this.routeId = routeId
         this.shortName = shortName
         this.longName = longName
         this.description = description
