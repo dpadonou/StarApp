@@ -33,6 +33,6 @@ class BusRoutes {
 
 
     override fun toString(): String {
-        return Utils.removeQuotes(shortName)
+        return shortName
     }
 }

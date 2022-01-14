@@ -1,7 +1,6 @@
 package fr.istic.mob.star2dp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment3Binding
 import fr.istic.mob.star2dp.models.BusRoutes
@@ -25,7 +25,7 @@ import fr.istic.mob.star2dp.util.Utils
  */
 class Fragment3 : Fragment() {
     private var binding: Fragment3Binding? = null
-    private lateinit var intermadiate: Intermediate
+    private lateinit var intermediate: Intermediate
     var data: HashMap<String, Any>? = null
 
     private var selectedStopTimes: StopsTime? = null
@@ -40,11 +40,13 @@ class Fragment3 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding = Fragment3Binding.inflate(inflater, container, false)
         val view = binding!!.root
+
+        intermediate = activity as Intermediate
 
         stopsTimesListView = view.findViewById(R.id.stop_times_list_view)
 
@@ -60,20 +62,19 @@ class Fragment3 : Fragment() {
             selectedTimeTextView = view.findViewById(R.id.selected_time_text_view_3)
             selectedStopTextView = view.findViewById(R.id.stop_text_3)
 
-            selectedLine.text = Utils.removeQuotes((data!!["line"] as BusRoutes).shortName)
+            selectedLine.text = (data!!["line"] as BusRoutes).shortName
             selectedTerminus.text = (data!!["terminus"] as Terminus).name
             selectedDateTextView.text = data!!["chosenDate"] as String
             selectedTimeTextView.text = data!!["chosenTime"] as String
-            selectedStopTextView.text = Utils.removeQuotes((data!!["stop"] as Stops).stopName)
+            selectedStopTextView.text = (data!!["stop"] as Stops).stopName
         }
-        val params =
-            mapOf(
-                "route_id" to Utils.removeQuotes((data!!["line"] as BusRoutes).routeId),
-                "stop_id" to Utils.removeQuotes((data!!["stop"] as Stops).stopId),
-                "direction_id" to (data!!["terminus"] as Terminus).id,
-                "day" to data!!["chosenDay"] as String,
-                "arrival_time" to data!!["fullChosenTime"] as String
-            )
+        val params = mapOf(
+            "route_id" to (data!!["line"] as BusRoutes).routeId,
+            "stop_id" to (data!!["stop"] as Stops).stopId,
+            "direction_id" to (data!!["terminus"] as Terminus).id,
+            "day" to data!!["chosenDay"] as String,
+            "arrival_time" to data!!["fullChosenTime"] as String
+        )
         stopsTimesList = Utils.getStopTimes(params)
 
         val stopsTimesArrayAdapter = ArrayAdapter(
@@ -88,7 +89,7 @@ class Fragment3 : Fragment() {
                 selectedStopTimes = parent?.getItemAtPosition(position) as StopsTime
                 if (selectedStopTimes != null) {
                     data!!["stopTime"] = selectedStopTimes!!
-                    intermadiate.sendData(Fragment4.newInstance(), data!!)
+                    intermediate.sendData(Fragment4.newInstance(), data!!)
                 }
             }
 
@@ -107,8 +108,6 @@ class Fragment3 : Fragment() {
         @JvmStatic
         fun newInstance() =
             Fragment3().apply {
-                arguments = Bundle().apply {
-                }
             }
     }
 }

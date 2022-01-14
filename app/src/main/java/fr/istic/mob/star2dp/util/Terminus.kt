@@ -10,6 +10,6 @@ class Terminus {
     }
 
     override fun toString(): String {
-        return Utils.removeQuotes(name)
+        return name
     }
 }

@@ -1,5 +1,6 @@
 package fr.istic.mob.star2dp.models
 
+import fr.istic.mob.star2dp.util.CalendarUtils
 import fr.istic.mob.star2dp.util.Utils
 
 class StopsTime {
@@ -27,6 +28,6 @@ class StopsTime {
     }
 
     override fun toString(): String {
-        return "Prévus pour: ${Utils.removeQuotes(arrivalTime).dropLast(3).replace(':', 'h')}"
+        return "Prévus pour: ${CalendarUtils.beautifyHour(arrivalTime)}"
     }
 }

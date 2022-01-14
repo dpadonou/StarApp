@@ -23,7 +23,7 @@ class CustomAdapter : BaseAdapter {
         layoutId: Int,
         elements: List<BusRoutes>,
         itemId: Int,
-        itemParentId: Int
+        itemParentId: Int,
     ) : super() {
         this.context = context
         this.layoutId = layoutId
@@ -54,9 +54,13 @@ class CustomAdapter : BaseAdapter {
         val mText = mView.findViewById<TextView>(this.itemId)
         val mTextparent = mView.findViewById<LinearLayout>(this.itemParentId)
         val mRoute = getItem(position) as BusRoutes
-        mText.text = Utils.removeQuotes(mRoute.shortName)
-        mText.setTextColor(Color.parseColor(Utils.appendHashtag(Utils.removeQuotes(mRoute.color))))
-       // mTextparent.setBackgroundColor(Color.parseColor("#" + Utils.removeQuotes(mRoute.color)))
+        if (mRoute.color.equals("")) {
+            mText.setTextColor(Color.parseColor("#000000"))
+        } else {
+            mText.setTextColor(Color.parseColor(Utils.appendHashtag(mRoute.color)))
+        }
+        mText.text = mRoute.shortName
+        // mTextparent.setBackgroundColor(Color.parseColor("#" + Utils.removeQuotes(mRoute.color)))
         return mView
     }
 

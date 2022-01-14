@@ -13,14 +13,13 @@ import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment1Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.util.*
-import java.time.ZoneId
 import java.util.*
 
 class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
     private var binding: Fragment1Binding? = null
-    private lateinit var intermadiate: Intermediate
+    private lateinit var intermediate: Intermediate
 
     private lateinit var btnDate: Button
     private lateinit var btnTime: Button
@@ -56,7 +55,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         binding = Fragment1Binding.inflate(inflater, container, false)
         val view = binding!!.root
 
-        intermadiate = activity as Intermediate
+        intermediate = activity as Intermediate
 
         btnDate = view.findViewById(R.id.chooseDateBtn)
         btnTime = view.findViewById(R.id.chooseHourBtn)
@@ -88,7 +87,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                 if (position != 0) {
                     selectedBusRoutes = parent?.getItemAtPosition(position) as BusRoutes
 
-                    selectedBusRoutesFullName = Utils.removeQuotes(selectedBusRoutes!!.longName)
+                    selectedBusRoutesFullName = selectedBusRoutes!!.longName
                     Log.i("", "$selectedBusRoutesFullName")
 
                     listTerminus = Utils.getTerminus(selectedBusRoutesFullName!!)
@@ -147,7 +146,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                         "chosenTime" to chosenTime!!,
                         "fullChosenTime" to fullChosenTime!!,
                     )
-                intermadiate.sendData(Fragment2.newInstance(), data)
+                intermediate.sendData(Fragment2.newInstance(), data)
             }
         }
 

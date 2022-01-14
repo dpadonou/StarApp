@@ -69,28 +69,32 @@ class CalendarUtils {
         fun getDayName(day: Int): String {
             return when (day) {
                 Calendar.SUNDAY -> {
-                    "Dimanche"
+                    "sunday"
                 }
                 Calendar.MONDAY -> {
-                    "Lundi"
+                    "monday"
                 }
                 Calendar.TUESDAY -> {
-                    "Mardi"
+                    "tuesday"
                 }
                 Calendar.WEDNESDAY -> {
-                    "Mercredi"
+                    "wednesday"
                 }
                 Calendar.THURSDAY -> {
-                    "Jeudi"
+                    "thursday"
                 }
                 Calendar.FRIDAY -> {
-                    "Vendredi"
+                    "friday"
                 }
                 Calendar.SATURDAY -> {
-                    "Samedi"
+                    "saturday"
                 }
                 else -> ""
             }
+        }
+
+        fun beautifyHour(hour: String): String{
+            return hour.dropLast(3).replace(':', 'h')
         }
     }
 }

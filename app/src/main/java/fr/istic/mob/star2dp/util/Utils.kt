@@ -129,7 +129,7 @@ class Utils {
                 if (i == 0) {
                     stop_name = listStops[0].stopName
                 }
-                if (i != 0 && listStops[i].stopName.equals(stop_name)) {
+                if (i != 0 && listStops[i].stopName == stop_name) {
                     lastIndex = i
                 }
             }
@@ -206,7 +206,7 @@ class Utils {
                 StarContract.Stops.StopColumns._ID
             )!!
             val busRoutes: MutableList<BusRoutes> = ArrayList()
-            busRoutes.add(BusRoutes(0, "","", "", "", "", "", ""))
+            busRoutes.add(BusRoutes(0, "", "", "", "", "", "", ""))
             while (cursor.moveToNext()) {
                 val item = BusRoutes(
                     cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
@@ -228,33 +228,6 @@ class Utils {
             return busRoutes
         }
 
-        /**Enlevez les cotes présentes sur les valeurs**/
-        fun removeQuotes(str: String): String {
-            return str.replace("\"", "")
-        }
-
-        /** Ajoutez des cotes sur certaines valeurs **/
-        fun addQuote(str: String): String {
-            return '"' + str + '"'
-        }
-        /**Récupérer les différentes directions d'une ligne **/
-        /*fun getTerminus(str: String): List<String> {
-            var splitted = str.split("<>")
-            var result: MutableList<String> = mutableListOf()
-            result.add("Choisir une direction")
-            for (str:String in splitted){
-                val firstSplit = str.split("(")
-                var secondSplit:List<String>? = null
-                if(firstSplit.size > 1){
-                    secondSplit = firstSplit[1].split(")")
-                }
-                result.add(secondSplit?.get(0).toString())
-            }
-            //result.addAll(listOf(splitted[0], splitted[splitted.size - 1]))
-
-            return result
-        }*/
-
         /** Ajouter # sur un string "**/
         fun appendHashtag(str: String): String {
             return "#$str"
@@ -264,17 +237,35 @@ class Utils {
             var splitted = str.split("<>")
             var result: MutableList<Terminus> = mutableListOf()
             result.add(Terminus("", "Choisir une direction"))
-            for (value: String in splitted) {
-                val firstSplit = value.split("(")
-                if (firstSplit.size > 1) {
-                    val secondSplit = firstSplit[1].split(")")
-                    result.add(Terminus("\"0\"", secondSplit[1]))
-                    result.add(Terminus("\"1\"", secondSplit[0]))
+            /* for (value: String in splitted) {
+                 val firstSplit = value.split("(")
+                 if (firstSplit.size > 1) {
+                     val secondSplit = firstSplit[1].split(")")
+                     result.add(Terminus("0", secondSplit[1]))
+                     result.add(Terminus("1", secondSplit[0]))
+                 }
+             }*/
+            for (i in splitted.indices) {
+                if (i == 0) {
+                    val firstSplit = splitted[i].split("(")
+                    if (firstSplit.size > 1) {
+                        val secondSplit = firstSplit[1].split(")")
+                        result.add(Terminus("1", secondSplit[0]))
+                    }
+                } else {
+                    val firstSplit = splitted[i].split("(")
+                    if (firstSplit.size > 1) {
+                        val secondSplit = firstSplit[1].split(")")
+                        result.add(Terminus("0", secondSplit[0]))
+                        if (firstSplit.size > 2) {
+                            val secondSplit = firstSplit[2].split(")")
+                            result.add(Terminus("0", secondSplit[0]))
+                        }
+                    }
                 }
             }
             return result
         }
-
     }
 
 }

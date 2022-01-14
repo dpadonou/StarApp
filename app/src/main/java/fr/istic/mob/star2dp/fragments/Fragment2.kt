@@ -20,7 +20,7 @@ import fr.istic.mob.star2dp.util.Utils
 class Fragment2 : Fragment() {
 
     private var binding: Fragment2Binding? = null
-    private lateinit var intermadiate: Intermediate
+    private lateinit var intermediate: Intermediate
 
     var data: HashMap<String, Any>? = null
 
@@ -47,6 +47,8 @@ class Fragment2 : Fragment() {
         binding = Fragment2Binding.inflate(inflater, container, false)
         val view = binding!!.root
 
+        intermediate = activity as Intermediate
+
         data = arguments?.getSerializable("data") as HashMap<String, Any>
         for (s in data!!.keys) {
             println("$s : ${data!![s]}")
@@ -59,7 +61,7 @@ class Fragment2 : Fragment() {
             selectedTimeTextView = view.findViewById(R.id.selected_time_text_view_2)
             stopsListView = view.findViewById(R.id.stopsListView)
 
-            selectedLine.text = Utils.removeQuotes((data!!["line"] as BusRoutes).shortName)
+            selectedLine.text = (data!!["line"] as BusRoutes).shortName
             selectedTerminus.text = (data!!["terminus"] as Terminus).name
             selectedDateTextView.text = data!!["chosenDate"] as String
             selectedTimeTextView.text = data!!["chosenTime"] as String
@@ -78,7 +80,7 @@ class Fragment2 : Fragment() {
                 selectedStops = parent?.getItemAtPosition(position) as Stops
                 if (selectedStops != null) {
                     data!!["stop"] = selectedStops!!
-                    intermadiate.sendData(Fragment3.newInstance(), data!!)
+                    intermediate.sendData(Fragment3.newInstance(), data!!)
                 }
             }
         return view
