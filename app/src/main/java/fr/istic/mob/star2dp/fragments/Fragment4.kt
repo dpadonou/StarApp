@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import fr.istic.mob.star2dp.R
+import fr.istic.mob.star2dp.adapters.CustomAdapter
+import fr.istic.mob.star2dp.adapters.RouteDetailsAdapter
 import fr.istic.mob.star2dp.databinding.Fragment3Binding
 import fr.istic.mob.star2dp.databinding.Fragment4Binding
 import fr.istic.mob.star2dp.models.BusRoutes
@@ -69,11 +71,18 @@ class Fragment4 : Fragment() {
             )
         routeDetailsList = Utils.getRouteDetails(params)
 
-        val routeDetailsArrayAdapter = ArrayAdapter(
+        /*val routeDetailsArrayAdapter = ArrayAdapter(
             this.requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
             routeDetailsList!!
+        )*/
+
+        val routeDetailsArrayAdapter = RouteDetailsAdapter(
+            this.requireActivity(),
+            R.layout.route_details_row,
+            routeDetailsList!!
         )
+
         routeDetailsListView.adapter = routeDetailsArrayAdapter
 
         return view

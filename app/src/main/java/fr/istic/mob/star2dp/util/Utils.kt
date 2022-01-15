@@ -3,6 +3,7 @@ package fr.istic.mob.star2dp.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
+import android.os.Bundle
 import fr.istic.mob.star2dp.contract.StarContract
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.models.Stops
@@ -28,7 +29,7 @@ class Utils {
         /**
          * récupérer la liste des routes
          */
-        fun getBusRoute(): List<BusRoutes>? {
+        fun getBusRoute(): List<BusRoutes> {
             val cursor: Cursor = this.context.contentResolver
                 .query(StarContract.BusRoutes.CONTENT_URI, null, null, null, null)!!
             val busRoutes: MutableList<BusRoutes> = ArrayList()
@@ -44,20 +45,18 @@ class Utils {
                     "000000"
                 )
             )
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    val item = BusRoutes(
-                        cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TYPE)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.COLOR)),
-                        cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TEXT_COLOR))
-                    )
-                    busRoutes.add(item)
-                }
+            while (cursor.moveToNext()) {
+                val item = BusRoutes(
+                    cursor.getInt(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns._ID)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.ROUTE_ID)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.SHORT_NAME)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.LONG_NAME)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.DESCRIPTION)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TYPE)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.COLOR)),
+                    cursor.getString(cursor.getColumnIndex(StarContract.BusRoutes.BusRouteColumns.TEXT_COLOR))
+                )
+                busRoutes.add(item)
             }
             val i = busRoutes.size
             if (i != 0) {
@@ -70,7 +69,7 @@ class Utils {
         /**
          * Récupérer la liste des arrêts correspondant à la recherche
          */
-        fun searchStop(searchText: String): List<String>? {
+        fun searchStop(searchText: String): List<String> {
             var searchText = searchText
             searchText = searchText.trim { it <= ' ' }
             val listStops: MutableList<String> = ArrayList()
@@ -265,6 +264,13 @@ class Utils {
                 }
             }
             return result
+        }
+
+        fun sendData(data: HashMap<String, Any>): Bundle {
+            val bundle = Bundle()
+            bundle.putSerializable("data", data)
+
+            return bundle
         }
     }
 

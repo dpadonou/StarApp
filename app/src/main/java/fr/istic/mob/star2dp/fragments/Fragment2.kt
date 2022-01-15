@@ -9,18 +9,17 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment2Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.models.Stops
-import fr.istic.mob.star2dp.util.Intermediate
 import fr.istic.mob.star2dp.util.Terminus
 import fr.istic.mob.star2dp.util.Utils
 
 class Fragment2 : Fragment() {
 
     private var binding: Fragment2Binding? = null
-    private lateinit var intermediate: Intermediate
 
     var data: HashMap<String, Any>? = null
 
@@ -41,17 +40,17 @@ class Fragment2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = Fragment2Binding.inflate(inflater, container, false)
         val view = binding!!.root
 
-        intermediate = activity as Intermediate
-
-        data = arguments?.getSerializable("data") as HashMap<String, Any>
-        for (s in data!!.keys) {
-            println("$s : ${data!![s]}")
+        if (arguments != null) {
+            data = arguments?.getSerializable("data") as HashMap<String, Any>
+            for (s in data!!.keys) {
+                println("$s : ${data!![s]}")
+            }
         }
 
         if (data != null) {
@@ -67,7 +66,8 @@ class Fragment2 : Fragment() {
             selectedTimeTextView.text = data!!["chosenTime"] as String
         }
 
-        stopsList = Utils.getStop((data!!["line"] as BusRoutes).routeId, (data!!["terminus"] as Terminus).id)!!
+        stopsList = Utils.getStop((data!!["line"] as BusRoutes).routeId,
+            (data!!["terminus"] as Terminus).id)!!
         val stopsArrayAdapter = ArrayAdapter(
             this.requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
@@ -80,7 +80,8 @@ class Fragment2 : Fragment() {
                 selectedStops = parent?.getItemAtPosition(position) as Stops
                 if (selectedStops != null) {
                     data!!["stop"] = selectedStops!!
-                    intermediate.sendData(Fragment3.newInstance(), data!!)
+                    Navigation.findNavController(view)
+                        .navigate(R.id.go_to_third, Utils.sendData(data!!))
                 }
             }
         return view
@@ -90,9 +91,6 @@ class Fragment2 : Fragment() {
         @JvmStatic
         fun newInstance() =
             Fragment2().apply {
-                arguments = Bundle().apply {
-
-                }
             }
     }
 }

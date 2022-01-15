@@ -9,7 +9,4 @@ class RouteDetails {
         this.hour = hour
     }
 
-    override fun toString(): String {
-        return "$name \t\t\t\t\t\t\t ${CalendarUtils.beautifyHour(hour)}"
-    }
 }

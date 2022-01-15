@@ -1,4 +1,4 @@
-package fr.istic.mob.star2dp.util
+package fr.istic.mob.star2dp.adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 import fr.istic.mob.star2dp.models.BusRoutes
+import fr.istic.mob.star2dp.util.Utils
 
 class CustomAdapter : BaseAdapter {
 

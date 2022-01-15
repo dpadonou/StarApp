@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import fr.istic.mob.star2dp.R
+import fr.istic.mob.star2dp.adapters.CustomAdapter
 import fr.istic.mob.star2dp.databinding.Fragment1Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.util.*
@@ -19,7 +21,6 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
     private var binding: Fragment1Binding? = null
-    private lateinit var intermediate: Intermediate
 
     private lateinit var btnDate: Button
     private lateinit var btnTime: Button
@@ -55,8 +56,6 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         binding = Fragment1Binding.inflate(inflater, container, false)
         val view = binding!!.root
 
-        intermediate = activity as Intermediate
-
         btnDate = view.findViewById(R.id.chooseDateBtn)
         btnTime = view.findViewById(R.id.chooseHourBtn)
         btnNext = view.findViewById(R.id.nextBtn)
@@ -71,7 +70,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
         val linesArrayAdapter = CustomAdapter(
             this.requireActivity(),
             R.layout.item,
-            Utils.getBusRoute()!!,
+            Utils.getBusRoute(),
             R.id.myTextView,
             R.id.textParent
         )
@@ -146,7 +145,8 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
                         "chosenTime" to chosenTime!!,
                         "fullChosenTime" to fullChosenTime!!,
                     )
-                intermediate.sendData(Fragment2.newInstance(), data)
+
+                Navigation.findNavController(view).navigate(R.id.go_to_second, Utils.sendData(data))
             }
         }
 
