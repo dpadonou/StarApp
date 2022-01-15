@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import fr.istic.mob.star2dp.R
-import fr.istic.mob.star2dp.databinding.Fragment3Binding
+import fr.istic.mob.star2dp.custom_classes.RouteDetailsAdapter
 import fr.istic.mob.star2dp.databinding.Fragment4Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.models.Stops
@@ -69,11 +67,18 @@ class Fragment4 : Fragment() {
             )
         routeDetailsList = Utils.getRouteDetails(params)
 
-        val routeDetailsArrayAdapter = ArrayAdapter(
+        /*val routeDetailsArrayAdapter = ArrayAdapter(
             this.requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
             routeDetailsList!!
+        )*/
+
+        val routeDetailsArrayAdapter = RouteDetailsAdapter(
+            this.requireActivity(),
+            R.layout.route_details_row,
+            routeDetailsList!!
         )
+
         routeDetailsListView.adapter = routeDetailsArrayAdapter
 
         return view

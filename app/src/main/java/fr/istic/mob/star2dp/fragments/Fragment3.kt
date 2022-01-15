@@ -9,12 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment3Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.models.Stops
 import fr.istic.mob.star2dp.models.StopsTime
-import fr.istic.mob.star2dp.util.Intermediate
 import fr.istic.mob.star2dp.util.Terminus
 import fr.istic.mob.star2dp.util.Utils
 
@@ -25,7 +25,6 @@ import fr.istic.mob.star2dp.util.Utils
  */
 class Fragment3 : Fragment() {
     private var binding: Fragment3Binding? = null
-    private lateinit var intermediate: Intermediate
     var data: HashMap<String, Any>? = null
 
     private var selectedStopTimes: StopsTime? = null
@@ -45,8 +44,6 @@ class Fragment3 : Fragment() {
 
         binding = Fragment3Binding.inflate(inflater, container, false)
         val view = binding!!.root
-
-        intermediate = activity as Intermediate
 
         stopsTimesListView = view.findViewById(R.id.stop_times_list_view)
 
@@ -89,7 +86,7 @@ class Fragment3 : Fragment() {
                 selectedStopTimes = parent?.getItemAtPosition(position) as StopsTime
                 if (selectedStopTimes != null) {
                     data!!["stopTime"] = selectedStopTimes!!
-                    intermediate.sendData(Fragment4.newInstance(), data!!)
+                    Navigation.findNavController(view).navigate(R.id.go_to_forth, Utils.sendData(data!!))
                 }
             }
 

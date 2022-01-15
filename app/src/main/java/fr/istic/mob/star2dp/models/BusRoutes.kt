@@ -1,6 +1,7 @@
 package fr.istic.mob.star2dp.models
 
 import fr.istic.mob.star2dp.util.Utils
+import kotlin.reflect.typeOf
 
 class BusRoutes {
     var _id:Int = 0
@@ -31,6 +32,9 @@ class BusRoutes {
         this.textColor = textColor
     }
 
+    fun hasSameId(busRoutes: BusRoutes): Boolean{
+        return this._id == busRoutes._id
+    }
 
     override fun toString(): String {
         return shortName

@@ -9,7 +9,7 @@
     <string name="select_direct">Selectionnez la direction</string>
     <string name="ligne_text">Ligne:</string>
     <string name="direction_text">Direction:</string>
-    <string name="select_stop_text">Selectionnez l\'arrêt</string>
+    <string name="select_stop_text">Arrêt :</string>
     <string name="select_stop_time">Selectionnez l\'heure et la date</string>
     <string name="le_reste_du_trajet">le reste du trajet</string>
     <string name="arrets_text">Arrêts</string>
@@ -21,4 +21,9 @@
     <string name="at"> à </string>
     <string name="prev_date">Prévu pour le </string>
     <string name="depart_time">Départ chosis :</string>
+    <string name="search_text">Trouver un arrêt</string>
+    <string name="find_bus_text">Rechercher un bus</string>
+    <string name="close_text">Fermer</string>
+    <string name="choose_line_text">Bus passant par ce arrêt</string>
+    <string name="empty_text">""</string>
 </resources>

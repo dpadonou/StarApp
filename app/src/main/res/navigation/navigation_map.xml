@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_map"
+    app:startDestination="@id/fragment1">
+
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="fr.istic.mob.star2dp.fragments.Fragment1"
+        android:label="Fragment1" >
+        <action
+            android:id="@+id/go_to_second"
+            app:destination="@id/fragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="fr.istic.mob.star2dp.fragments.Fragment2"
+        android:label="fragment_2"
+        tools:layout="@layout/fragment_2" >
+        <action
+            android:id="@+id/go_to_third"
+            app:destination="@id/fragment3"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/back_to_first"
+            app:destination="@id/fragment1"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="fr.istic.mob.star2dp.fragments.Fragment3"
+        android:label="fragment_3"
+        tools:layout="@layout/fragment_3" >
+        <action
+            android:id="@+id/go_to_forth"
+            app:destination="@id/fragment4"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/back_to_second"
+            app:destination="@id/fragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment4"
+        android:name="fr.istic.mob.star2dp.fragments.Fragment4"
+        android:label="fragment_4"
+        tools:layout="@layout/fragment_4">
+        <action
+            android:id="@+id/back_to_third"
+            app:destination="@id/fragment3"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="fr.istic.mob.star2dp.fragments.SearchResultFragment"
+        android:label="SearchResultFragment" >
+        <action
+            android:id="@+id/go_to_first"
+            app:destination="@id/fragment1" />
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/customDialog"
+        android:name="fr.istic.mob.star2dp.custom_classes.CustomDialog"
+        android:label="CustomDialog" >
+        <action
+            android:id="@+id/go_to_result"
+            app:destination="@id/searchResultFragment" />
+    </dialog>
+</navigation>

@@ -1,6 +1,8 @@
 package fr.istic.mob.star2dp.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +11,17 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import fr.istic.mob.star2dp.R
 import fr.istic.mob.star2dp.databinding.Fragment2Binding
 import fr.istic.mob.star2dp.models.BusRoutes
 import fr.istic.mob.star2dp.models.Stops
-import fr.istic.mob.star2dp.util.Intermediate
 import fr.istic.mob.star2dp.util.Terminus
 import fr.istic.mob.star2dp.util.Utils
 
 class Fragment2 : Fragment() {
 
     private var binding: Fragment2Binding? = null
-    private lateinit var intermediate: Intermediate
 
     var data: HashMap<String, Any>? = null
 
@@ -33,6 +34,9 @@ class Fragment2 : Fragment() {
     private lateinit var stopsListView: ListView
     private lateinit var stopsList: List<Stops>
 
+    private lateinit var searchTextView: TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,17 +45,19 @@ class Fragment2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = Fragment2Binding.inflate(inflater, container, false)
         val view = binding!!.root
 
-        intermediate = activity as Intermediate
+        searchTextView = view.findViewById(R.id.search_text_view)
 
-        data = arguments?.getSerializable("data") as HashMap<String, Any>
-        for (s in data!!.keys) {
-            println("$s : ${data!![s]}")
+        if (arguments != null) {
+            data = arguments?.getSerializable("data") as HashMap<String, Any>
+            for (s in data!!.keys) {
+                println("$s : ${data!![s]}")
+            }
         }
 
         if (data != null) {
@@ -67,7 +73,8 @@ class Fragment2 : Fragment() {
             selectedTimeTextView.text = data!!["chosenTime"] as String
         }
 
-        stopsList = Utils.getStop((data!!["line"] as BusRoutes).routeId, (data!!["terminus"] as Terminus).id)!!
+        stopsList = Utils.getStop((data!!["line"] as BusRoutes).routeId,
+            (data!!["terminus"] as Terminus).id)!!
         val stopsArrayAdapter = ArrayAdapter(
             this.requireContext(),
             R.layout.support_simple_spinner_dropdown_item,
@@ -75,12 +82,46 @@ class Fragment2 : Fragment() {
         )
         stopsListView.adapter = stopsArrayAdapter
 
+        val savedList = Utils.getStop((data!!["line"] as BusRoutes).routeId,
+            (data!!["terminus"] as Terminus).id)!!
+
+        searchTextView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int,
+            ) {
+            }
+
+            override fun onTextChanged(
+                newValue: CharSequence, start: Int,
+                before: Int, count: Int,
+            ) {
+                if (newValue.isNotEmpty()) {
+                    val newList = savedList.filter { stops ->
+                        stops.stopName.lowercase().contains(newValue.toString().lowercase())
+                    }
+
+                    stopsArrayAdapter.clear()
+                    stopsArrayAdapter.addAll(newList)
+                    stopsListView.adapter = stopsArrayAdapter
+                    stopsListView.invalidate()
+                } else {
+                    stopsArrayAdapter.clear()
+                    stopsArrayAdapter.addAll(savedList)
+                    stopsListView.adapter = stopsArrayAdapter
+                    stopsListView.invalidate()
+                }
+            }
+        })
+
         stopsListView.onItemClickListener =
             AdapterView.OnItemClickListener { parent, _, position, _ ->
                 selectedStops = parent?.getItemAtPosition(position) as Stops
                 if (selectedStops != null) {
                     data!!["stop"] = selectedStops!!
-                    intermediate.sendData(Fragment3.newInstance(), data!!)
+                    Navigation.findNavController(view)
+                        .navigate(R.id.go_to_third, Utils.sendData(data!!))
                 }
             }
         return view
@@ -90,9 +131,6 @@ class Fragment2 : Fragment() {
         @JvmStatic
         fun newInstance() =
             Fragment2().apply {
-                arguments = Bundle().apply {
-
-                }
             }
     }
 }

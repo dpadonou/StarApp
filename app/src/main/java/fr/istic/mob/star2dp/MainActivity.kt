@@ -1,39 +1,38 @@
 package fr.istic.mob.star2dp
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import fr.istic.mob.star2dp.fragments.Fragment1
-import fr.istic.mob.star2dp.util.Intermediate
+import fr.istic.mob.star2dp.custom_classes.CustomDialog
 import fr.istic.mob.star2dp.util.Utils
 
-class MainActivity : AppCompatActivity(), Intermediate {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Utils.setContext(this)
-
-        val fragment1 = Fragment1()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment1)
-            .commit()
     }
 
-    override fun sendData(receiver: Fragment, data: HashMap<String, Any>) {
-
-        val bundle = Bundle()
-        bundle.putSerializable("data", data)
-        receiver.arguments = bundle
-
-        this.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in,  // enter
-                R.anim.fade_out,  // exit
-                R.anim.fade_in,   // popEnter
-                R.anim.slide_out  // popExit
-            )
-            .replace(R.id.fragment_container, receiver)
-            .commit()
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_find_bus -> {
+            var dialog = CustomDialog.newInstance()
+
+            dialog.show(supportFragmentManager, "searchStops")
+
+            true
+        }
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
 }
