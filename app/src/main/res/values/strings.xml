@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Star2DP</string>
+    <string name="app_name" translatable="false">Star2DP</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_date_time">Selectionnez la date et l\'heure</string>
@@ -9,9 +9,21 @@
     <string name="select_direct">Selectionnez la direction</string>
     <string name="ligne_text">Ligne:</string>
     <string name="direction_text">Direction:</string>
-    <string name="select_stop_text">Selectionnez l\'arrêt</string>
+    <string name="select_stop_text">Arrêt :</string>
     <string name="select_stop_time">Selectionnez l\'heure et la date</string>
     <string name="le_reste_du_trajet">le reste du trajet</string>
     <string name="arrets_text">Arrêts</string>
     <string name="heures_text">Heures</string>
+    <string name="liste_des_lignes">liste des lignes</string>
+    <string name="terminusChooserText">chooseTermiuns</string>
+    <string name="dateChooserText">04 Decembre 2021</string>
+    <string name="hour">20 : 27</string>
+    <string name="at"> à </string>
+    <string name="prev_date">Prévu pour le </string>
+    <string name="depart_time">Départ chosis :</string>
+    <string name="search_text">Trouver un arrêt</string>
+    <string name="find_bus_text">Rechercher un bus</string>
+    <string name="close_text">Fermer</string>
+    <string name="choose_line_text">Bus passant par ce arrêt</string>
+    <string name="empty_text">""</string>
 </resources>

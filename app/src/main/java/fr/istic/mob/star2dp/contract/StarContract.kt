@@ -1,4 +1,4 @@
-package fr.istic.mob.star2dp.models
+package fr.istic.mob.star2dp.contract
 
 import android.net.Uri
 import android.provider.BaseColumns

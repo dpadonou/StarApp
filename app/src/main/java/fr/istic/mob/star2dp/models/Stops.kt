@@ -11,17 +11,23 @@ class Stops {
 
     constructor(
         id: Int,
+        stopId: String,
         stopName: String,
         description: String,
         latitude: String,
         longitutde: String,
-        wheelChairBoarding: String
+        wheelChairBoarding: String,
     ) {
         this.id = id
+        this.stopId = stopId
         this.stopName = stopName
         this.description = description
         this.latitude = latitude
         this.longitutde = longitutde
         this.wheelChairBoarding = wheelChairBoarding
+    }
+
+    override fun toString(): String {
+        return "$stopName-$description"
     }
 }

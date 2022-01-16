@@ -1,223 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".Fragment1">
+        app:layout_constraintBottom_toTopOf="@+id/lignesSpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="NotSibling">
 
-
-        <LinearLayout android:layout_height="wrap_content"
+        <Spinner
+            android:id="@+id/lignesSpin"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/liste_des_lignes"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:background="@drawable/little_rounded_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/select_date_time"
-                android:textSize="22dp"
-                android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/terminusSpin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:contentDescription="@string/terminusChooserText"
+            android:textAlignment="center"
+            android:background="@drawable/little_rounded_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lignesSpin"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        </LinearLayout>
-
-
-
-
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:gravity="center">
-
-
-            <EditText
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="8dp"
-                android:background="#d4d4d4"
-                android:hint=""
-                android:padding="5dp"
-                android:textColor="#897"
-                android:textColorHint="#090"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
-
-            <EditText
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="8dp"
-                android:background="#d4d4d4"
-                android:hint=""
-                android:padding="5dp"
-                android:textColor="#897"
-                android:textColorHint="#090"
-                android:textSize="23sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
-        </LinearLayout>
-
-
-
-
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginHorizontal="30dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/select_busroute"
-                    android:textSize="23dp"
-                    android:textStyle="bold">
-
-                </TextView>
-
-            </LinearLayout>
-
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:background="#d4d4d4"
-                >
-
-                <Spinner android:id="@+id/spinner_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="5dp"
-                    android:spinnerMode="dialog">
-                </Spinner>
-            </LinearLayout>
-
-
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/select_ligne"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="22dp"
-                    android:gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="22dp"
-                        android:layout_marginRight="20dp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView android:id="@+id/line"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" ------"
-                        android:textSize="28dp"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:layout_marginHorizontal="30dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/select_direct"
-                    android:textSize="23dp"
-                    android:textStyle="bold">
-
-                </TextView>
-
-            </LinearLayout>
-
-
-            <LinearLayout android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:background="#d4d4d4">
-
-                <Spinner android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner_direction"
-                    android:paddingHorizontal="5dp"
-                    android:spinnerMode="dialog">
-                </Spinner>
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp"
-            android:paddingTop="30dp"
-            android:paddingHorizontal="10dp"
-            android:gravity="center_horizontal">
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="50dp">
 
             <Button
-                android:id="@+id/next"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/holo_green_dark"
-                android:gravity="center"
-                android:text="@string/next_text"
-                android:textColor="@android:color/white"
-                android:textSize="25dp" />
+                android:id="@+id/chooseDateBtn"
+                style="?spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/dateChooserText"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/terminusSpin" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/chooseHourBtn"
+                style="?spinnerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/hour"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/terminusSpin" />
         </LinearLayout>
 
-
-
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/next_text"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseHourBtn" />
 
     </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

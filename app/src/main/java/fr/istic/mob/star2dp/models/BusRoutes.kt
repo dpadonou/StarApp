@@ -1,6 +1,7 @@
 package fr.istic.mob.star2dp.models
 
-import fr.istic.mob.star2dp.Utils
+import fr.istic.mob.star2dp.util.Utils
+import kotlin.reflect.typeOf
 
 class BusRoutes {
     var _id:Int = 0
@@ -13,6 +14,7 @@ class BusRoutes {
     var textColor: String = ""
     constructor(
         _id: Int,
+        routeId:String,
         shortName: String,
         longName: String,
         description: String,
@@ -21,6 +23,7 @@ class BusRoutes {
         textColor: String
     ) {
         this._id = _id
+        this.routeId = routeId
         this.shortName = shortName
         this.longName = longName
         this.description = description
@@ -29,7 +32,11 @@ class BusRoutes {
         this.textColor = textColor
     }
 
+    fun hasSameId(busRoutes: BusRoutes): Boolean{
+        return this._id == busRoutes._id
+    }
+
     override fun toString(): String {
-        return "${Utils.formatString(shortName)}"
+        return shortName
     }
 }

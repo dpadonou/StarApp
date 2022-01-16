@@ -1,16 +1,38 @@
 package fr.istic.mob.star2dp
 
-import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import fr.istic.mob.star2dp.models.BusRoutes
-import fr.istic.mob.star2dp.models.StarContract
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import fr.istic.mob.star2dp.custom_classes.CustomDialog
+import fr.istic.mob.star2dp.util.Utils
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val f1 = this.supportFragmentManager.findFragmentById(R.id.fragment1) as Fragment1
+        Utils.setContext(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_find_bus -> {
+            var dialog = CustomDialog.newInstance()
+
+            dialog.show(supportFragmentManager, "searchStops")
+
+            true
+        }
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
     }
 
 }
