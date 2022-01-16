@@ -47,10 +47,10 @@ class Utils {
      * Récupérer la liste des arrêts correspondant à la recherche
      */
 
-    fun searchStop(searchText: String): List<String>? {
+    fun searchStop(searchText: String): List<Stops>? {
         var searchText = searchText
-       searchText = searchText.trim { it <= ' ' }
-        val listStops: MutableList<String> = ArrayList()
+        searchText = searchText.trim { it <= ' ' }
+        val listStops: MutableList<Stops> = ArrayList()
         if (searchText != "") {
             val selectionArgs = arrayOf(searchText)
             val cursor: Cursor? = this.context.contentResolver.query(
@@ -62,7 +62,16 @@ class Utils {
             )
             if (cursor!!.moveToFirst()) {
                 do {
-                    listStops.add(cursor.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.NAME)))
+                    val item = Stops(
+                        cursor!!.getInt(cursor.getColumnIndex(StarContract.Stops.StopColumns._ID)),
+                        cursor!!.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.NAME)),
+                        cursor!!.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.DESCRIPTION)),
+                        cursor!!.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.LATITUDE)),
+                        cursor!!.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.LONGITUDE)),
+                        cursor!!.getString(cursor.getColumnIndex(StarContract.Stops.StopColumns.WHEELCHAIR_BOARDING))
+                    )
+                    listStops.add(item)
+                    //idtrips.add(cursor.getString(cursor.getColumnIndex(StarContract.Trips.TripColumns.TRIP_ID))) ;
                 } while (cursor.moveToNext())
             }
         }
