@@ -11,7 +11,7 @@
     <string name="direction_text">Direction:</string>
     <string name="select_stop_text">Stop:</string>
     <string name="select_stop_time">Select the time and date</string>
-    <string name="le_reste_du_trajet">lthe rest of the way</string>
+    <string name="le_reste_du_trajet">the rest of the way</string>
     <string name="arrets_text">Stops</string>
     <string name="heures_text">Hours</string>
     <string name="liste_des_lignes">list of lines</string>
