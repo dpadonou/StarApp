@@ -28,6 +28,6 @@ class Stops {
     }
 
     override fun toString(): String {
-        return "$stopName-$description"
+        return "$stopName"
     }
 }

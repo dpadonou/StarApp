@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:contentDescription="@string/liste_des_lignes"
+            android:contentDescription="@string/liste_des_lignes"-r
             android:spinnerMode="dialog"
             android:textAlignment="center"
             android:background="@drawable/little_rounded_shape"

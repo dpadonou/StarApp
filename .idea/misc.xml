@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Arnauld Cyriaque/.gradle/caches/transforms-3/418862d49e47e0633ab6131300a274bb/transformed/appcompat-1.4.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.1" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_1.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_2.xml" value="0.15454545454545454" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_3.xml" value="0.1" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_4.xml" value="0.15454545454545454" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/item.xml" value="0.1" />
-        <entry key="..\:/Users/Arnauld Cyriaque/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.1" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/fragment_search_result.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/grid_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arnauld Cyriaque/AndroidStudioProjects/Star2DP/app/src/main/res/layout/route_details_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/dieu-/.gradle/caches/transforms-3/a3ac3e09c2eac1a7e99912ab6a7cac93/transformed/appcompat-1.4.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.23550724637681159" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/font/roboto_medium.xml" value="0.271875" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/activity_main.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/fragment_1.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/fragment_2.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/fragment_3.xml" value="0.23550724637681159" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/fragment_4.xml" value="0.23550724637681159" />
+        <entry key="..\:/Users/dieu-/StudioProjects/star2dp/app/src/main/res/layout/item.xml" value="0.4" />
       </map>
     </option>
   </component>

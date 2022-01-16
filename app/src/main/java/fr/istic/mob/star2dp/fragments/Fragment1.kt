@@ -86,7 +86,7 @@ class Fragment1 : Fragment(), DatePickerDialog.OnDateSetListener,
             this.requireActivity(),
             R.layout.item,
             Utils.getBusRoute(),
-            R.id.myTextView,
+            R.id.myTextview,
             R.id.textParent
         )
         lines.adapter = linesArrayAdapter
