@@ -1,8 +1,5 @@
-<<<<<<< HEAD:app/src/main/java/fr/istic/mob/star2dp/custom_classes/CustomAdapter.kt
+
 package fr.istic.mob.star2dp.custom_classes
-=======
-package fr.istic.mob.star2dp.adapters
->>>>>>> 3c20e21736e06dfb915cd2d39512e90db6aea6f3:app/src/main/java/fr/istic/mob/star2dp/adapters/CustomAdapter.kt
 
 import android.annotation.SuppressLint
 import android.app.Activity
